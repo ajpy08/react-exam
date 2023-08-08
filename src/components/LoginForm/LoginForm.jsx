@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button, Checkbox } from "@mui/material";
 import axios from "axios";
+import "./LoginForm.css";
 
 const LoginForm = ({ onLogin }) => {
   const [email, setEmail] = useState("");
@@ -46,10 +47,7 @@ const LoginForm = ({ onLogin }) => {
     }
 
     if (email === "angel.puc@dacodes.com.mx" && password === "1234567") {
-      sessionStorage.setItem(
-        "apiKey",
-        apiKey
-      );
+      sessionStorage.setItem("apiKey", apiKey);
       const options = {
         method: "GET",
         url: "https://api.themoviedb.org/3/authentication/guest_session/new",
@@ -63,7 +61,10 @@ const LoginForm = ({ onLogin }) => {
         .request(options)
         .then(function (response) {
           if (response.data.guest_session_id) {
-            sessionStorage.setItem("guest_session_id", response.data.guest_session_id);
+            sessionStorage.setItem(
+              "guest_session_id",
+              response.data.guest_session_id
+            );
           }
         })
         .catch(function (error) {
@@ -89,7 +90,7 @@ const LoginForm = ({ onLogin }) => {
   };
 
   return (
-    <div style={{ width: 1000, backgroundColor: "#03067B" }}>
+    <div style={{ width: 1000 }}>
       <div style={{ margin: 40 }}>
         <TextField
           label="Correo electrónico de DaCodes"
@@ -97,7 +98,6 @@ const LoginForm = ({ onLogin }) => {
           value={email}
           name="email"
           onChange={handleEmailChange}
-          // style={{width: '655px', height: '66px'}}
           error={errorEmail}
           helperText={errorEmail ? "Ingrese un email válido" : ""}
           fullWidth
@@ -115,7 +115,6 @@ const LoginForm = ({ onLogin }) => {
           error={errorPassword}
           helperText={errorPassword ? "Ingrese una contraseña válida" : ""}
           fullWidth
-          // style={{width: '655px', height: '66px'}}
         />
         <br />
         <br />
@@ -123,8 +122,9 @@ const LoginForm = ({ onLogin }) => {
         He leído y acepto los terminos y condiciones <br />
         <br />
         <Button
+          className="button"
           disabled={!errorEmail && !errorPassword && !errorTerms}
-          variant="contained"
+          id="btn"
           onClick={handleSubmit}
         >
           Crear cuenta
