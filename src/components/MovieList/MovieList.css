@@ -45,9 +45,9 @@
 
 .overlay-text-title {
   font-weight: bold;
-  font-size: 14px;
-  max-width: 80%;
-  text-align: justify;
+  font-size: 16px;
+  max-width: 100%;
+  text-align: center;
   padding: 5px;
   box-sizing: border-box;
   word-break: break-word;

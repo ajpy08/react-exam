@@ -173,9 +173,9 @@ const MovieList = () => {
               <div className="overlay">
                 <div className="overlay-text">
                   <div className="overlay-text-title">{item.title}</div>
-                  <div>{`${item.release_date}`}</div>
+                  <div className="overlay-text-title">{`${item.release_date}`}</div>
                   <br />
-                  <div>
+                  <div style={{textAlign: "justify"}}>
                     {!item.overview
                       ? "The overview will be soon..."
                       : item.overview.length > 250
