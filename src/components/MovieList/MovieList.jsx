@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CircularProgress, Rating, Pagination, Box } from "@mui/material";
 import axios from "axios";
 import "./MovieList.css";
+import noPoster from '../../assets/files/no-poster.png'
 
 const Sections = {
   latest: "Latest",
@@ -159,12 +160,12 @@ const MovieList = () => {
               <img
                 src={`${
                   !item.poster_path
-                    ? "src/assets/files/no-poster.png"
+                    ? {noPoster}
                     : `https://image.tmdb.org/t/p/w300${item.poster_path}?w=164&h=164&fit=crop&auto=format`
                 }`}
                 srcSet={`${
                   !item.poster_path
-                    ? "src/assets/files/no-poster.png"
+                    ? {noPoster}
                     : `https://image.tmdb.org/t/p/w300${item.poster_path}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`
                 }`}
                 alt={item.title}
