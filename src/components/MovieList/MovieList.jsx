@@ -16,6 +16,7 @@ const MovieList = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [section, setSection] = useState(Sections.popular);
 
   useEffect(() => {
@@ -88,6 +89,7 @@ const MovieList = () => {
           : [response.data];
         setMovies(data);
         setLoading(false);
+        setTotalPages(response.data.total_pages > 500 ? 500 : response.data.total_pages)
       })
       .catch(function (error) {
         console.error(error);
@@ -160,13 +162,8 @@ const MovieList = () => {
               <img
                 src={`${
                   !item.poster_path
-                    ? {noPoster}
+                    ? 'https://www.prokerala.com/movies/assets/img/no-poster-available.jpg'
                     : `https://image.tmdb.org/t/p/w300${item.poster_path}?w=164&h=164&fit=crop&auto=format`
-                }`}
-                srcSet={`${
-                  !item.poster_path
-                    ? {noPoster}
-                    : `https://image.tmdb.org/t/p/w300${item.poster_path}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`
                 }`}
                 alt={item.title}
               />
@@ -203,7 +200,7 @@ const MovieList = () => {
       </div>
       <Box display="flex" justifyContent="center" mt={3}>
         <Pagination
-          count={500}
+          count={totalPages}
           page={currentPage}
           onChange={handleChangePage}
           color="primary"
